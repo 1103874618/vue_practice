@@ -9,8 +9,9 @@
   <link rel="stylesheet" type="text/css" media="screen" href="shopping.css" />
   <link rel="stylesheet" href="bootstrap.css">
   <script src="jquery-3.3.1.min.js"></script>
-  <script src="bu.js"></script>
+  <script src="vue.js"></script>
   <script src="bootstrap.js"></script>
+  <script src="bu.js"></script>
 </head>
 
 <body>
@@ -49,8 +50,21 @@
     <div class="footer">
       <hr />
       <em>Change the title of your shopping list here</em>
-      <input class="js-change-title" type="text" value="My Shopping List" />
+      <input class="js-change-title" type="text" value="My Shopping List" v-model="title" />
     </div>
+  </div>
+
+  <div id="app" class="container">
+    <h2>{{ title }}</h2>
+    <ul>
+      <li v-for="item in items" v-bind:class="{ 'removed':item.checked }"><!-- 绑定的键值对是什么意思 -->
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" v-model="item.checked"> {{item.text }} <!-- 是否input用在不同的元素上功能就不同 -->
+          </label>
+        </div>
+      </li>
+    </ul>
   </div>
 </body>
 

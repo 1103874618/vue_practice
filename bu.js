@@ -4,6 +4,7 @@ $(document).ready(function () {
    */
   function onAdd() {
     var $ul, li, $li, $label, $div, value;
+
     value = $('.js-new-item').val();
     //validate against empty values
     if (value === '') {
@@ -25,25 +26,37 @@ $(document).ready(function () {
       .append(value);
     $('.js-new-item').val('');
   }
+
   /**
-   * Checkbox click handler -
-   * toggles class removed on li parent element
+   * Checkbox click handler - toggles class removed on li parent element
    * @param ev
    */
   function toggleRemoved(ev) {
     var $el;
+
     $el = $(ev.currentTarget);
     $el.closest('li').toggleClass('removed');
   }
+
+
+
   $('.js-add').click(onAdd);
   $('.js-item').click(toggleRemoved);
-});
+  $('.js-change-title').keyup(onChangeTitle);
 
-$('.js-change-title').keyup(onChangeTitle);
+    new Vue({
+    el: '#app',
+    data: data
+  });
+});
 
 function onChangeTitle() {
   $('h2').text($('.js-change-title').val());
-   console.log($('.js-change-title').val());
-   console.log("dsle");
 }
 
+var data = {
+  items: [{text:'Bananas', checked:true}, 
+          {text:'Apples' ,checked :false}],//
+  title: 'My Shopping List',
+   newItem: ''
+};
