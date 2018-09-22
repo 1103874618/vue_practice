@@ -7,7 +7,6 @@
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="toma.css" />
-  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="../../common/fontawesome-free-5.3.1-web/css/all.css">
   <link rel="stylesheet" href="../../common/bootstrap.css">
   <script src="../../common/jquery-3.3.1.min.js"></script>
@@ -20,16 +19,30 @@
   <div id="app" class="container">
     <h2>
       <span>Pomodoro</span>
-      <button @click="start()">
+      <button :disabled="state==='started'" @click="start()">
         <i class="fas fa-play"></i>
       </button>
+
+      <button :disabled="state!=='started'" @click="pause()">
+        <i class="fas fa-pause"></i>
+      </button>
+
+      <button :disabled="state!=='started' && state !=='paused'" @click="stop()">
+        <i class="fas fa-stop"></i>
+      </button>
+
     </h2>
     <h3>{{ title }}</h3>
-    <div class="well">
+    <div class="card bg-light card-block time_block ">
       <div class="pomodoro-timer">
-        <span>{{ minute }}</span>:<span>{{ second }}</span>
+        <span>{{ min }}</span>:<span>{{ sec }}</span>
       </div>
     </div>
+
+    <div class="card bg-light reset_pic" v-bind:class="{ 'hidden': pomodoroState === 'work' }">
+      <img :src="'http://thecatapi.com/api/images/get?type=gif&size=med&ts=' + timestamp"  />
+    </div>
+
   </div>
 </body>
 

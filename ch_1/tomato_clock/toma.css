@@ -1,0 +1,11 @@
+.time_block{
+  width: 8rem;
+  padding: 2rem;
+}
+.reset_pic{
+  width: 25rem;
+}
+div .hidden{
+  overflow: hidden;
+  display: none;
+}
