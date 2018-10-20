@@ -14,7 +14,7 @@ import Hello from './components/HelloWorld'
 
 export default {
   name: 'App',
-  components: {
+  components: {// 导入组件以后还要注册
     Hello
   }
 }
