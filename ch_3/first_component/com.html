@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../../common/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <hello-component v-bind:user="user"></hello-component>
+  </div>
+
+  <template id="hello">
+    <h1>
+      {{msg}}
+      {{user}}
+    </h1>
+  </template>
+
+
+  <script>
+    Vue.component('hello-component', {
+       template: '#hello',
+       data: function () {
+        return {
+          msg: 'Hello'
+        }
+      },
+      props: ['user']
+    });
+
+
+    new Vue({
+      el: '#app',
+      data: {
+        user: 'hero'
+      }
+    });
+  </script>
+</body>
+
+</html>

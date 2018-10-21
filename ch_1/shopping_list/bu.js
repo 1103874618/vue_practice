@@ -1,6 +1,6 @@
 $(document).ready(function () {
   //利用定义属性方法控制dom值
- 
+
   var text = '';
   var h2 = document.getElementsByTagName('h2')[0];
 
@@ -66,7 +66,7 @@ $(document).ready(function () {
         var text;
         text = this.newItem.trim();
         if (text) {
-          this.items.push({//新项目推入
+          this.items.push({ //新项目推入
             text: text, //所以冒号前的text不用加冒号也不会认成变量咯
             checked: false
           });
@@ -98,4 +98,7 @@ var data = {
   newItem: ''
 };
 //第二章内容
-var obj = {};//为什么obj一定要放在ready外声明? 
+var obj = {}; //为什么obj一定要放在ready外声明? 
+
+
+

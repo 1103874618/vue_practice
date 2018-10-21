@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="shopping.css" />
-  <link rel="stylesheet" href="../../common/bootstrap.css">
-  <script src="../../common/jquery-3.3.1.min.js"></script>
-  <script src="../../common/vue.js"></script>
-  <script src="../../common/bootstrap.js"></script>
-  <script src="bu.js"></script>
-</head>
-
-<body>
-  <div class="container">
+<template>
+  <div id="apps">
+     <div class="container">
     <h2>My Shopping List</h2>
     <div class="input-group">
       <input placeholder="add shopping list item" type="text" class="js-new-item form-control">
@@ -57,18 +42,41 @@
   <div id="app" class="container">
     <h2>{{ title }}</h2>
     <ul>
-      <li v-for="item in items" v-bind:class="{ 'removed':item.checked }">
-        <!-- 绑定的键值对是什么意思 -->
+      <li v-for="item in items" :key="item.id" v-bind:class="{ 'removed':item.checked }"><!-- 绑定的键值对是什么意思 -->
         <div class="checkbox">
           <label>
-            <input type="checkbox" v-model="item.checked"> {{item.text }}
-            <!-- 是否input用在不同的元素上功能就不同 -->
+            <input type="checkbox" v-model="item.checked"> {{item.text }} <!-- 是否input用在不同的元素上功能就不同 -->
           </label>
         </div>
       </li>
     </ul>
   </div>
-</body>
+  </div>
+</template>
 
-</html>
+<script>
+import jquery from '../node_modules/jquery'
+import vue from '../node_modules/vue'
 
+
+
+</script>
+
+
+
+
+<style>
+.container {
+ width: 40%;
+ margin: 20px auto 0px auto;
+}
+.removed {
+ color: gray;
+}
+.removed label {
+ text-decoration: line-through;
+}
+ul li {
+ list-style-type: none;
+}
+</style>
