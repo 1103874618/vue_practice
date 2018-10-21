@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="../../common/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <greetings-component></greetings-component>
+  </div>
+
+
+  <template id="form">
+    <div>
+      <label for="name">What's your name?</label> 
+      <input v-model="user" type="text" id="name" v-bind:value="value"  v-on:input="onInput">
+      <!-- bind_value是为了将input内部的值与外部绑定起来,实现双向绑定 -->
+      <!-- 组件取消了双向绑定因此value不能用model -->
+      <!-- user之所以能用model是因为它不需要同过子组件改变父组件,他只用接受来自父组件的信息就行了 -->
+    </div>
+  </template>
+
+  <!-- //template for saying hello -->
+  <template id="hello">
+    <h1>{{msg}} {{user}}</h1>
+  </template>
+
+  <template id="greetings">
+    <div>
+      <!-- v-model用于不同情况下自动化的数据绑定(例如在输入框的情况下,model绑定的变量会自动与input的value值相绑定) -->
+      <!-- 对于需要使用输入法 (如中文、日文、韩文等) 的语言，你会发现 v-model 不会在输入法组合文字过程中得到更新。如果你也想处理这个过程，请使用 input 事件。 -->
+      <form-component  v-model="user"></form-component>
+      <hello-component v-model="user"></hello-component>
+    </div>
+  </template>
+
+
+
+
+  <script>
+    //register form component
+    Vue.component('form-component', {
+      template: '#form',
+      props: ['user'],//接受来自父元素greet的user值
+      props: ['value'],//此value是用来与input的value绑定的
+      methods: {
+        onInput: function (event) {
+          this.$emit('input', event.target.value)//发送input事件
+        }
+      }
+    });
+
+    //表单组件模板内的输入框应该将v - on : input和the onput方法绑定到v - on : input修饰符
+
+    //register hello component
+    Vue.component('hello-component', {
+      template: '#hello',
+      data: function () {
+        return {
+          msg: 'Hello'
+        }
+      },
+      props: ['user']//接受来自父元素greet的user值
+    });
+
+    Vue.component('greetings-component', {
+      template: '#greetings',
+      data: function () {
+        return {
+          user: 'hero'
+        }
+      }
+    });
+
+    new Vue({
+      el: '#app'
+    });
+  </script>
+</body>
+
+</html>
